@@ -1,5 +1,5 @@
 package com.safalifter.webscrapingwithjsoup.model;
 
 public enum Seller {
-    VATAN
+    TEKNOSA, VATAN
 }

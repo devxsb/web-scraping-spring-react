@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class VatanService {
@@ -73,5 +74,13 @@ public class VatanService {
             scrapeProductByPage(i);
             i++;
         } while (i < 1); // only 1 page for test
+    }
+
+    public List<Product> getProducts() {
+        return productService.getProductsBySeller(Seller.VATAN);
+    }
+
+    public Product getProductByModelNumber(String modelNumber) {
+        return productService.getProductsBySellerAndModelNumber(Seller.VATAN, modelNumber);
     }
 }
