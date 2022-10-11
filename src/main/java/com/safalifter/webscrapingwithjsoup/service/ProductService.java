@@ -17,13 +17,16 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final VatanService vatanService;
     private final TeknosaService teknosaService;
+    private final TrendyolService trendyolService;
 
     public ProductService(ProductRepository productRepository,
                           @Lazy VatanService vatanService,
-                          @Lazy TeknosaService teknosaService) {
+                          @Lazy TeknosaService teknosaService,
+                          @Lazy TrendyolService trendyolService) {
         this.productRepository = productRepository;
         this.vatanService = vatanService;
         this.teknosaService = teknosaService;
+        this.trendyolService = trendyolService;
     }
 
     public List<Product> getProducts() {
@@ -48,5 +51,7 @@ public class ProductService {
         vatanService.scrapeProducts();
         log.info("teknosa scraping started");
         teknosaService.scrapeProducts();
+        log.info("trendyol scraping started");
+        trendyolService.scrapeProducts();
     }
 }
