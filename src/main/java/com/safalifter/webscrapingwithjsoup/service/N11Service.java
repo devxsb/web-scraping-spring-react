@@ -26,7 +26,7 @@ public class N11Service {
         final Element e = document.select("div.columnContent").first();
         if (e != null &&
                 e.select("h3.productName").text().contains(modelNumber)) {
-            final String price = e.select("span.newPrice.cPoint.priceEventClick").text();
+            final String price = e.select("span.newPrice.cPoint.priceEventClick").text().split(" ")[0];
             final String link = e.select("a.plink").attr("href");
             final Document doc = Jsoup.connect(link).get();
             final Double score = Double.parseDouble(doc.select("div.ratingCont  strong").get(0).text());

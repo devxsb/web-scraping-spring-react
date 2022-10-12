@@ -26,7 +26,7 @@ public class TeknosaService {
         final Element e = document.select("div.prd ").first();
         if (e != null &&
                 e.select("h3.prd-title.prd-title-style").text().contains(modelNumber)) {
-            final String price = e.select("div.prd-prc2 span").text();
+            final String price = e.select("div.prd-prc2 span").text().split(" ")[0];
             final Double score = 0.0; // will be solved
             final String link = "https://www.teknosa.com/" + e.select("a.prd-link").attr("href");
             final String img = e.select("div.prd-media img").attr("data-srcset");

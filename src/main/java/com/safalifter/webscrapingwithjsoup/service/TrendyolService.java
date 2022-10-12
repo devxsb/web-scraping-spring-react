@@ -30,7 +30,7 @@ public class TrendyolService {
         final Element e = doc.select("div.product-container").first();
         if (e != null &&
                 e.select("h1.pr-new-br span").text().contains(modelNumber)) {
-            final String price = e.select("div.product-price-container span.prc-dsc").text();
+            final String price = e.select("div.product-price-container span.prc-dsc").text().split(" ")[0];
             final Double score = 0.0; // will be solved
             final String img = e.select("img").attr("src");
             final Product prd = vatanService.getProductByModelNumber(modelNumber);
