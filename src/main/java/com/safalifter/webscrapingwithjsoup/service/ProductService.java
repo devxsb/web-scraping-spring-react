@@ -48,6 +48,10 @@ public class ProductService {
         return productRepository.findProductBySellerAndModelNumber(seller, modelNumber);
     }
 
+    public List<Product> getProductsByModelNumber(String modelNumber) {
+        return productRepository.findProductsByModelNumber(modelNumber);
+    }
+
     @Bean
     public void scrape() throws IOException {
         log.info("vatan scraping started");
