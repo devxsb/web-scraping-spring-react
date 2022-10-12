@@ -30,4 +30,7 @@ public class Product {
     private String diskCapacity;
     private Double score;
     private Seller seller;
+    private String name;
+    private String link;
+    private String img;
 }

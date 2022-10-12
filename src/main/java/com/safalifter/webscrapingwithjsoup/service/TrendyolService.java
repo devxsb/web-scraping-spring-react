@@ -32,6 +32,7 @@ public class TrendyolService {
                 e.select("h1.pr-new-br span").text().contains(modelNumber)) {
             final String price = e.select("div.product-price-container span.prc-dsc").text();
             final Double score = 0.0; // will be solved
+            final String img = e.select("img").attr("src");
             final Product prd = vatanService.getProductByModelNumber(modelNumber);
             final Product product = Product.builder()
                     .modelNumber(prd.getModelNumber())
@@ -45,7 +46,10 @@ public class TrendyolService {
                     .diskCapacity(prd.getDiskCapacity())
                     .price(price)
                     .score(score)
-                    .seller(Seller.TRENDYOL).build();
+                    .seller(Seller.TRENDYOL)
+                    .name(prd.getName())
+                    .link(link)
+                    .img(img).build();
             System.out.println(productService.saveProduct(product));
         }
     }

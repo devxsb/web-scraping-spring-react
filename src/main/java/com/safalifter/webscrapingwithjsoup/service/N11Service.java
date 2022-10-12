@@ -30,6 +30,7 @@ public class N11Service {
             final String link = e.select("a.plink").attr("href");
             final Document doc = Jsoup.connect(link).get();
             final Double score = Double.parseDouble(doc.select("div.ratingCont  strong").get(0).text());
+            final String img = e.select("img.lazy.cardImage").attr("data-src");
             final Product prd = vatanService.getProductByModelNumber(modelNumber);
             final Product product = Product.builder()
                     .modelNumber(prd.getModelNumber())
@@ -43,7 +44,10 @@ public class N11Service {
                     .diskCapacity(prd.getDiskCapacity())
                     .price(price)
                     .score(score)
-                    .seller(Seller.N11).build();
+                    .seller(Seller.N11)
+                    .name(prd.getName())
+                    .link(link)
+                    .img(img).build();
             System.out.println(productService.saveProduct(product));
         }
     }

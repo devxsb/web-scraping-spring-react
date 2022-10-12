@@ -28,6 +28,8 @@ public class TeknosaService {
                 e.select("h3.prd-title.prd-title-style").text().contains(modelNumber)) {
             final String price = e.select("div.prd-prc2 span").text();
             final Double score = 0.0; // will be solved
+            final String link = "https://www.teknosa.com/" + e.select("a.prd-link").attr("href");
+            final String img = e.select("div.prd-media img").attr("data-srcset");
             final Product prd = vatanService.getProductByModelNumber(modelNumber);
             final Product product = Product.builder()
                     .modelNumber(prd.getModelNumber())
@@ -41,7 +43,10 @@ public class TeknosaService {
                     .diskCapacity(prd.getDiskCapacity())
                     .price(price)
                     .score(score)
-                    .seller(Seller.TEKNOSA).build();
+                    .seller(Seller.TEKNOSA)
+                    .name(prd.getName())
+                    .link(link)
+                    .img(img).build();
             System.out.println(productService.saveProduct(product));
         }
     }

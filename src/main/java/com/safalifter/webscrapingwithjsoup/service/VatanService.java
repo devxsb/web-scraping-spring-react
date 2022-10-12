@@ -33,6 +33,8 @@ public class VatanService {
             final String brand = doc.select("a.bradcrumb-item").get(3).text();
             final String price = doc.select("div.d-cell.col-sm-3.col-xs-3.short-price span.product-list__price").text();
             final Double score = Double.parseDouble(doc.select("strong#averageRankNum").text());
+            final String name = doc.select("h1.product-list__product-name").text();
+            final String img = e.select("img.lazyimg").attr("data-src");
             final Product product = new Product();
             for (Element tr : table.select("tr")) {
                 for (Element td : tr.select("td")) {
@@ -64,6 +66,9 @@ public class VatanService {
             product.setPrice(price);
             product.setScore(score);
             product.setSeller(Seller.VATAN);
+            product.setName(name);
+            product.setLink(link);
+            product.setImg(img);
             System.out.println(productService.saveProduct(product));
         }
     }
