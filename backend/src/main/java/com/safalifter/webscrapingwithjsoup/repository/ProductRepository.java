@@ -11,5 +11,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findProductBySellerAndModelNumber(Seller seller, String modelNumber);
 
-    List<Product> findProductsByModelNumber(String modelNumber);
+    List<Product> findProductsByModelNumberOrderByPrice(String modelNumber);
 }

@@ -32,7 +32,9 @@ public class ProductService {
         this.n11Service = n11Service;
     }
 
-    public List<Product> getProducts() {
+    public List<Product> getProducts(String modelNumber) {
+        if (modelNumber != null)
+            return getProductsByModelNumber(modelNumber);
         return productRepository.findAll();
     }
 
@@ -48,11 +50,14 @@ public class ProductService {
         return productRepository.findProductBySellerAndModelNumber(seller, modelNumber);
     }
 
+    // 3 most affordable sites
     public List<Product> getProductsByModelNumber(String modelNumber) {
-        return productRepository.findProductsByModelNumber(modelNumber);
+        if (productRepository.findProductsByModelNumberOrderByPrice(modelNumber).size() > 3)
+            return productRepository.findProductsByModelNumberOrderByPrice(modelNumber).subList(0, 2);
+        return productRepository.findProductsByModelNumberOrderByPrice(modelNumber);
     }
 
-    @Bean
+    //    @Bean // will be solved with duplicate
     public void scrape() throws IOException {
         log.info("vatan scraping started");
         vatanService.scrapeProducts();
