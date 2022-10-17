@@ -2,7 +2,6 @@ package com.safalifter.webscrapingwithjsoup.controller;
 
 import com.safalifter.webscrapingwithjsoup.model.Product;
 import com.safalifter.webscrapingwithjsoup.service.ProductService;
-import org.aspectj.weaver.ISourceContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
