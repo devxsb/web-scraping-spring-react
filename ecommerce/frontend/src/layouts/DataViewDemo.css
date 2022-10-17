@@ -1,0 +1,33 @@
+.dataview-demo .product-name {
+    font-size: 1rem;
+    font-weight: 700;
+    height: 40px
+}
+
+.dataview-demo .product-grid-item {
+    margin: .5em;
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+.dataview-demo .product-grid-item .product-grid-item-top,
+.dataview-demo .product-grid-item .product-grid-item-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dataview-demo .product-grid-item img {
+    width: 75%;
+    height: 150px;
+    margin: 2rem 0;
+}
+.dataview-demo .product-grid-item .product-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-top: 10px;
+    text-align: center;
+}
+.dataview-demo .product-grid-item .product-score{
+    padding-top: 10px;
+}
