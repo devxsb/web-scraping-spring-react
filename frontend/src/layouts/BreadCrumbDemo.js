@@ -7,14 +7,20 @@ import '../index.css';
 import React from 'react';
 import {BreadCrumb} from 'primereact/breadcrumb';
 
-const BreadCrumbDemo = () => {
-    const items = [
-        {label: 'Computer'},
-        {label: 'Notebook'},
-        {label: 'Laptop'}
-    ];
+const BreadCrumbDemo = ({val}) => {
+    let items;
+    {
+        val ? items = [
+            {label: 'Computer', url: '/'},
+            {label: 'Notebook', url: '/'},
+            {label: 'Laptop', url: '/'},
+            {label: val}] : items = [
+            {label: 'Computer', url: '/'},
+            {label: 'Notebook', url: '/'},
+            {label: 'Laptop', url: '/'}]
+    }
 
-    const home = {icon: 'pi pi-home'}
+    const home = {icon: 'pi pi-home', url: '/'}
 
     return (
         <div>

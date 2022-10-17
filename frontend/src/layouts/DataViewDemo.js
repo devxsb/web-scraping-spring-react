@@ -10,6 +10,7 @@ import {Dropdown} from 'primereact/dropdown';
 import ProductService from '../service/ProductService';
 import './DataViewDemo.css';
 import {Button} from "primereact/button";
+import {useNavigate} from "react-router-dom";
 
 const DataViewDemo = () => {
     const [products, setProducts] = useState([]);
@@ -53,15 +54,18 @@ const DataViewDemo = () => {
     const getProductsByModelNumber = (modelNumber) => {
         return productsByModelNumber.get(modelNumber)
     }
-
+    let navigate = useNavigate()
     const renderListItem = (data) => {
         const productsByMN = getProductsByModelNumber(data.modelNumber)
         return (
             <div className="col-12">
                 <div className="product-list-item">
-                    <img src={data.img} alt={data.id} style={{width: 150, height: 150}}/>
+                    <img src={data.img} alt={data.id} style={{height: "130px"}}/>
                     <div className="product-list-detail">
-                        <div className="product-name">{data.name}</div>
+                        <div className="product-name"
+                             onClick={() => navigate('/product/' + data.name)}
+                             style={{cursor: 'pointer'}}>{data.name.replaceAll("-", " ")}
+                        </div>
                         {productsByMN ? (
                                 <div className="flex col-12">
                                     {productsByMN.map(store => (
@@ -70,16 +74,19 @@ const DataViewDemo = () => {
                                             <a href={store.link} target="blank">
                                                 <Button
                                                     className="border-bluegray-100 bg-white p-button-raised w-5 align-right">
-                                                    <img src={store.seller + ".png"} className="w-8 m-auto" alt={store.id}/>
+                                                    <img src={store.seller + ".png"} className="w-5 m-auto" alt={store.id}/>
                                                 </Button>
                                             </a>
                                         </div>
                                     ))}
                                 </div>) :
-                            <div style={{height: '135.289px'}}/>
+                            <div style={{height: '126.328px'}}/>
                         }
                     </div>
-                    <Button className="p-button-info">Product details</Button>
+                    <Button className="p-button-info"
+                            onClick={() => navigate('/product/' + data.name)}>
+                        Product details
+                    </Button>
                 </div>
             </div>
         );

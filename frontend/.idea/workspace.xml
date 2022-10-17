@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b90e00-0bc8-442d-9bbe-4961f68dc742" name="Changes" comment="base frontend template">
-      <change afterPath="$PROJECT_DIR$/src/layouts/CheckboxDemo.js" afterDir="false" />
+    <list default="true" id="30b90e00-0bc8-442d-9bbe-4961f68dc742" name="Changes" comment="product details page added">
+      <change afterPath="$PROJECT_DIR$/src/pages/ProductDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/Filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/BreadCrumbDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/BreadCrumbDemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/DataViewDemo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/DataViewDemo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/DataViewDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/DataViewDemo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ProductService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ProductService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +93,8 @@
       <workItem from="1665912222342" duration="2974000" />
       <workItem from="1665915331663" duration="1000" />
       <workItem from="1665915853390" duration="9000" />
-      <workItem from="1665915876613" duration="498000" />
+      <workItem from="1665915876613" duration="651000" />
+      <workItem from="1665942257080" duration="15371000" />
     </task>
     <task id="LOCAL-00001" summary="made some improvements for frontend">
       <created>1665910469593</created>
@@ -100,7 +110,21 @@
       <option name="project" value="LOCAL" />
       <updated>1665910607956</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="filter design done">
+      <created>1665916487342</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1665916487342</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added fetching products by name and made some improvements for db">
+      <created>1665994672859</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665994672859</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +145,9 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="made some improvements for frontend" />
     <MESSAGE value="base frontend template" />
-    <option name="LAST_COMMIT_MESSAGE" value="base frontend template" />
+    <MESSAGE value="filter design done" />
+    <MESSAGE value="added fetching products by name and made some improvements for db" />
+    <MESSAGE value="product details page added" />
+    <option name="LAST_COMMIT_MESSAGE" value="product details page added" />
   </component>
 </project>

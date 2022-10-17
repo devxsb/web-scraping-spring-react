@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div>
             <BreadCrumbDemo/>
-            <div className="flex col-11 m-auto">
+            <div className="flex col-10 m-auto">
                 <CheckboxDemo/>
                 <DataViewDemo/>
             </div>
