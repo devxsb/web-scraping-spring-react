@@ -6,7 +6,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -78,12 +77,12 @@ public class ProductService {
         }
     }
 
-    @Bean
+    //    @Bean
     public void scrapeProducts() throws IOException {
         int i = 1;
         do {
             scrapeProductByPage(i);
             i++;
-        } while (i < 1); // only 1 page for test
+        } while (i < 3); // only 1 page for test
     }
 }
