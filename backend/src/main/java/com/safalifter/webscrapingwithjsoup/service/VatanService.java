@@ -66,7 +66,9 @@ public class VatanService {
             product.setPrice(price);
             product.setScore(score);
             product.setSeller(Seller.VATAN);
-            product.setName(name);
+            product.setName(name
+                    .replaceAll(" ", "-")
+                    .replaceAll("/", "-"));
             product.setLink(link);
             product.setImg(img);
             System.out.println(productService.saveProduct(product));
@@ -78,7 +80,7 @@ public class VatanService {
         do {
             scrapeProductByPage(i);
             i++;
-        } while (i < 1); // only 1 page for test
+        } while (i < 3); // only 1 page for test
     }
 
     public List<Product> getProducts() {

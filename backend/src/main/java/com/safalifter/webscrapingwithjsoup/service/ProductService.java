@@ -35,7 +35,8 @@ public class ProductService {
     public List<Product> getProducts(String modelNumber) {
         if (modelNumber != null)
             return getProductsByModelNumber(modelNumber);
-        return productRepository.findAll();
+        // return productRepository.findAll(); // will be solved
+        return getProductsBySeller(Seller.VATAN); // only vatan's products for home page
     }
 
     public Product saveProduct(Product product) {
@@ -57,7 +58,11 @@ public class ProductService {
         return productRepository.findProductsByModelNumberOrderByPrice(modelNumber);
     }
 
-    //    @Bean // will be solved with duplicate
+    public List<Product> getProductsByName(String name) {
+        return productRepository.findProductsByName(name);
+    }
+
+    // @Bean // will be solved with duplicate
     public void scrape() throws IOException {
         log.info("vatan scraping started");
         vatanService.scrapeProducts();
