@@ -47,7 +47,12 @@ public class TeknosaService {
                     .name(prd.getName())
                     .link(link)
                     .img(img).build();
-            System.out.println(productService.saveProduct(product));
+            Product inDB = productService.getProductsBySellerAndModelNumber(Seller.TEKNOSA, modelNumber);
+            if (inDB != null && !inDB.equals(product)) {
+                product.setId(inDB.getId());
+                System.out.println(productService.saveProduct(product));
+            } else if (inDB == null)
+                System.out.println(productService.saveProduct(product));
         }
     }
 

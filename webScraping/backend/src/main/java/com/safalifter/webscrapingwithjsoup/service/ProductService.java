@@ -4,6 +4,7 @@ import com.safalifter.webscrapingwithjsoup.model.Product;
 import com.safalifter.webscrapingwithjsoup.model.Seller;
 import com.safalifter.webscrapingwithjsoup.repository.ProductRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +62,7 @@ public class ProductService {
         return productRepository.findProductsByName(name);
     }
 
-    // @Bean // will be solved with duplicate
+    @Bean
     public void scrape() throws IOException {
         log.info("vatan scraping started");
         vatanService.scrapeProducts();

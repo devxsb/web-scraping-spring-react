@@ -71,7 +71,12 @@ public class VatanService {
                     .replaceAll("/", "-"));
             product.setLink(link);
             product.setImg(img);
-            System.out.println(productService.saveProduct(product));
+            Product inDB = productService.getProductsBySellerAndModelNumber(Seller.VATAN, modelNumber);
+            if (inDB != null && !inDB.equals(product)) {
+                product.setId(inDB.getId());
+                System.out.println(productService.saveProduct(product));
+            } else if (inDB == null)
+                System.out.println(productService.saveProduct(product));
         }
     }
 
@@ -80,7 +85,7 @@ public class VatanService {
         do {
             scrapeProductByPage(i);
             i++;
-        } while (i < 3); // only 1 page for test
+        } while (i < 1); // only 1 page for test
     }
 
     public List<Product> getProducts() {
