@@ -27,7 +27,7 @@ public class Product {
     private String processorTechnology;
     private String diskType;
     private String diskCapacity;
-    private Double score;
+    private String score;
     private Seller seller;
     private String name;
     private String link;

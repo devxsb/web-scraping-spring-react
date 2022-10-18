@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -63,7 +62,7 @@ public class ProductService {
     }
 
     @Bean
-    public void scrape() throws IOException {
+    public void scrape() {
         log.info("vatan scraping started");
         vatanService.scrapeProducts();
         log.info("teknosa scraping started");
