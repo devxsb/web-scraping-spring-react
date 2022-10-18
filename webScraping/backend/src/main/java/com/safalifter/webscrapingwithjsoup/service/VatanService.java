@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class VatanService {
@@ -61,6 +62,7 @@ public class VatanService {
                     }
                 }
             }
+            product.setId(UUID.randomUUID());
             product.setModelNumber(modelNumber);
             product.setBrand(brand);
             product.setPrice(price);
@@ -72,10 +74,9 @@ public class VatanService {
             product.setLink(link);
             product.setImg(img);
             Product inDB = productService.getProductsBySellerAndModelNumber(Seller.VATAN, modelNumber);
-            if (inDB != null && !inDB.equals(product)) {
-                product.setId(inDB.getId());
+            if (inDB != null && !inDB.equals(product))
                 System.out.println(productService.saveProduct(product));
-            } else if (inDB == null)
+            else if (inDB == null)
                 System.out.println(productService.saveProduct(product));
         }
     }

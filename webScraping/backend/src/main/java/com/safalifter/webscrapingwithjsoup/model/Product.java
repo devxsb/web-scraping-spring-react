@@ -1,15 +1,13 @@
 package com.safalifter.webscrapingwithjsoup.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Objects;
+import java.util.UUID;
 
-@Entity
+@Document
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -18,8 +16,7 @@ import java.util.Objects;
 @ToString
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
     private String modelNumber;
     private String brand;
     private String price;
@@ -39,7 +36,7 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return Objects.equals(modelNumber, product.modelNumber) &&
                 Objects.equals(brand, product.brand) &&
@@ -60,6 +57,22 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(
+                id,
+                modelNumber,
+                brand,
+                price,
+                ram,
+                screenSize,
+                operatingSystem,
+                processorBrand,
+                processorTechnology,
+                diskType,
+                diskCapacity,
+                score,
+                seller,
+                name,
+                link,
+                img);
     }
 }

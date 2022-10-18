@@ -8,6 +8,7 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @Service
 public class N11Service {
@@ -33,6 +34,7 @@ public class N11Service {
             final String img = e.select("img.lazy.cardImage").attr("data-src");
             final Product prd = vatanService.getProductByModelNumber(modelNumber);
             final Product product = Product.builder()
+                    .id(UUID.randomUUID())
                     .modelNumber(prd.getModelNumber())
                     .brand(prd.getBrand())
                     .ram(prd.getRam())
@@ -49,10 +51,9 @@ public class N11Service {
                     .link(link)
                     .img(img).build();
             Product inDB = productService.getProductsBySellerAndModelNumber(Seller.N11, modelNumber);
-            if (inDB != null && !inDB.equals(product)) {
-                product.setId(inDB.getId());
+            if (inDB != null && !inDB.equals(product))
                 System.out.println(productService.saveProduct(product));
-            } else if (inDB == null)
+            else if (inDB == null)
                 System.out.println(productService.saveProduct(product));
         }
     }

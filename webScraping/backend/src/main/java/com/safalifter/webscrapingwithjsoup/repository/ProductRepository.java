@@ -2,11 +2,12 @@ package com.safalifter.webscrapingwithjsoup.repository;
 
 import com.safalifter.webscrapingwithjsoup.model.Product;
 import com.safalifter.webscrapingwithjsoup.model.Seller;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends MongoRepository<Product, UUID> {
     List<Product> findProductsBySeller(Seller seller);
 
     Product findProductBySellerAndModelNumber(Seller seller, String modelNumber);
