@@ -28,10 +28,14 @@ public class N11Service {
             final Element e = document.select("div.columnContent").first();
             if (e != null &&
                     e.select("h3.productName").text().contains(modelNumber)) {
-                final String price = e.select("span.newPrice.cPoint.priceEventClick").text().split(" ")[0];
+                final Double price = Double.parseDouble(e.select("span.newPrice.cPoint.priceEventClick").text()
+                        .split(" ")[0]
+                        .replace(".", "")
+                        .replace(",", "."));
                 final String link = e.select("a.plink").attr("href");
                 final Document doc = Jsoup.connect(link).get();
-                final String score = doc.select("div.ratingCont  strong").text().split(" ")[0];
+                final Double score = Double.parseDouble(doc.select("div.ratingCont  strong").text()
+                        .split(" ")[0]);
                 final String img = e.select("img.lazy.cardImage").attr("data-src");
                 final Product prd = vatanService.getProductByModelNumber(modelNumber);
                 final Product product = Product.builder()

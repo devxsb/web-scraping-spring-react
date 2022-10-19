@@ -19,7 +19,7 @@ public class Product {
     private UUID id;
     private String modelNumber;
     private String brand;
-    private String price;
+    private Double price;
     private String ram;
     private String screenSize;
     private String operatingSystem;
@@ -27,7 +27,7 @@ public class Product {
     private String processorTechnology;
     private String diskType;
     private String diskCapacity;
-    private String score;
+    private Double score;
     private Seller seller;
     private String name;
     private String link;

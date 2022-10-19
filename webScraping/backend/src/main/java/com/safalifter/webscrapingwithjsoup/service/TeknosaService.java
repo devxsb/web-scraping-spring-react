@@ -28,8 +28,10 @@ public class TeknosaService {
             final Element e = document.select("div.prd ").first();
             if (e != null &&
                     e.select("h3.prd-title.prd-title-style").text().contains(modelNumber)) {
-                final String price = e.select("div.prd-prc2 span").text().split(" ")[0];
-                final String score; // will be solved
+                final Double price = Double.parseDouble(e.select("div.prd-prc2 span").text()
+                        .split(" ")[0]
+                        .replace(".", ""));
+                final Double score; // will be solved
                 final String link = "https://www.teknosa.com/" + e.select("a.prd-link").attr("href");
                 final String img = e.select("div.prd-media img").attr("data-srcset");
                 final Product prd = vatanService.getProductByModelNumber(modelNumber);

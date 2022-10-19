@@ -32,8 +32,11 @@ public class TrendyolService {
             final Element e = doc.select("div.product-container").first();
             if (e != null &&
                     e.select("h1.pr-new-br span").text().contains(modelNumber)) {
-                final String price = e.select("div.product-price-container span.prc-dsc").text().split(" ")[0];
-                final String score; // will be solved
+                final Double price = Double.parseDouble(e.select("div.product-price-container span.prc-dsc").text()
+                        .split(" ")[0]
+                        .replace(".", "")
+                        .replace(",", "."));
+                final Double score; // will be solved
                 final String img = e.select("img").attr("src");
                 final Product prd = vatanService.getProductByModelNumber(modelNumber);
                 final Product product = Product.builder()
