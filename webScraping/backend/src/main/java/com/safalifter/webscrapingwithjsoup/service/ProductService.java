@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @Log4j2
@@ -33,9 +34,11 @@ public class ProductService {
         this.n11Service = n11Service;
     }
 
-    public Object getProducts(String modelNumber, Pageable page) {
+    public Object getProducts(String modelNumber, String search, Pageable page) {
         if (modelNumber != null)
             return getProductsByModelNumber(modelNumber);
+        else if (search != null)
+            return getProductsBySearch(search, page);
         // return productRepository.findAll(); // will be solved
         return getProductsBySeller(Seller.VATAN, page); // only vatan's products for home page
     }
@@ -61,6 +64,26 @@ public class ProductService {
 
     public List<Product> getProductsByName(String name) {
         return productRepository.findProductsByName(name);
+    }
+
+    public Object getProductsBySearch(String searchValue, Pageable page) {
+        try {
+            if (productRepository.findProductsByNameContainsIgnoreCase(
+                    searchValue.replaceAll(" ", "-"), page).getTotalElements() > 0)
+                return productRepository.findProductsByNameContainsIgnoreCase(
+                        searchValue.replaceAll(" ", "-"), page);
+            else if (productRepository.findProductsByModelNumberOrderByPrice(
+                    searchValue).size() > 0)
+                return productRepository.findProductsByModelNumberOrderByPrice(
+                        searchValue).subList(0, 1);
+            else if (productRepository.findProductsBySeller(Seller.valueOf(
+                    searchValue.toUpperCase(Locale.ROOT)), page).getTotalElements() > 0)
+                return productRepository.findProductsBySeller(Seller.valueOf(
+                        searchValue.toUpperCase(Locale.ROOT)), page);
+        } catch (Exception e) {
+            System.err.println("Search not found: " + searchValue);
+        }
+        return null;
     }
 
     @Bean

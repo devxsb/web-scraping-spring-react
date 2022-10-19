@@ -22,8 +22,9 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<?> getProducts(
             @RequestParam(required = false) String modelNumber,
-            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 16) Pageable page) {
-        return ResponseEntity.ok(productService.getProducts(modelNumber, page));
+            @RequestParam(required = false) String search,
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 8) Pageable page) {
+        return ResponseEntity.ok(productService.getProducts(modelNumber, search, page));
     }
 
     @GetMapping("/{name}")

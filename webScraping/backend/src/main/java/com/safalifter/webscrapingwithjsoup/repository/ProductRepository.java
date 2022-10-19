@@ -17,4 +17,6 @@ public interface ProductRepository extends MongoRepository<Product, UUID> {
     List<Product> findProductsByModelNumberOrderByPrice(String modelNumber);
 
     List<Product> findProductsByName(String name);
+
+    Page<Product> findProductsByNameContainsIgnoreCase(String search, Pageable page);
 }
