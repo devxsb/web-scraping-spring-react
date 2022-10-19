@@ -6,6 +6,8 @@ import com.safalifter.webscrapingwithjsoup.repository.ProductRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,19 +33,19 @@ public class ProductService {
         this.n11Service = n11Service;
     }
 
-    public List<Product> getProducts(String modelNumber) {
+    public Object getProducts(String modelNumber, Pageable page) {
         if (modelNumber != null)
             return getProductsByModelNumber(modelNumber);
         // return productRepository.findAll(); // will be solved
-        return getProductsBySeller(Seller.VATAN); // only vatan's products for home page
+        return getProductsBySeller(Seller.VATAN, page); // only vatan's products for home page
     }
 
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public List<Product> getProductsBySeller(Seller seller) {
-        return productRepository.findProductsBySeller(seller);
+    public Page<Product> getProductsBySeller(Seller seller, Pageable page) {
+        return productRepository.findProductsBySeller(seller, page);
     }
 
     public Product getProductsBySellerAndModelNumber(Seller seller, String modelNumber) {

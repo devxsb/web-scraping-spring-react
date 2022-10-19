@@ -22,9 +22,8 @@ public class VatanService {
 
     public void scrapeProductByPage(int page) {
         final String url = "https://www.vatanbilgisayar.com/laptop/?page=" + page;
-        final Document document;
         try {
-            document = Jsoup.connect(url).get();
+            final Document document = Jsoup.connect(url).get();
             final Elements body = document.select("div.wrapper-product-main");
             for (Element e : body.select("div.product-list.product-list--list-page")) {
                 final String link = "https://www.vatanbilgisayar.com" +
@@ -92,11 +91,11 @@ public class VatanService {
         do {
             scrapeProductByPage(i);
             i++;
-        } while (i < 10); // only 1 page for test
+        } while (i < 1); // only 1 page for test
     }
 
     public List<Product> getProducts() {
-        return productService.getProductsBySeller(Seller.VATAN);
+        return productService.getProductsBySeller(Seller.VATAN, null).stream().toList();
     }
 
     public Product getProductByModelNumber(String modelNumber) {
