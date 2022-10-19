@@ -11,6 +11,7 @@ import ProductService from '../service/ProductService';
 import './DataViewDemo.css';
 import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
+import {InputText} from "primereact";
 
 const DataViewDemo = () => {
     const [products, setProducts] = useState([]);
@@ -19,9 +20,11 @@ const DataViewDemo = () => {
     const productService = new ProductService();
     const [page, setPage] = useState(0)
     const [sortValue, setSortValue] = useState(null)
+    const [renderFilter, setRenderFilter] = useState(null)
     const size = 8
+
     useEffect(() => {
-        productService.getProducts(page, size, sortValue).then(async res => {
+        productService.getProducts(page, size, sortValue, renderFilter).then(async res => {
             setProducts(res.data)
             const cache = new Map()
             for await (const i of res.data.content) {
@@ -30,7 +33,7 @@ const DataViewDemo = () => {
             }
             setProductsByModelNumber(cache)
         })
-    }, [page, sortValue]);
+    }, [page, sortValue, renderFilter]);
 
     const sortOptions = [
         {label: 'Price High to Low', value: '0'},
@@ -104,12 +107,42 @@ const DataViewDemo = () => {
         return renderListItem(product);
     }
 
+    const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        setGlobalFilterValue(value);
+    }
+    const onSubmitGlobalFilter = (e) => {
+        productService.getProductsBySearch(globalFilterValue).then(async res => {
+            setProducts(res.data)
+            setRenderFilter(globalFilterValue)
+            setGlobalFilterValue('')
+            const cache = new Map()
+            for await (const i of res.data.content) {
+                const j = await productService.getProductsByModelNumber(i.modelNumber)
+                cache.set(i.modelNumber, j.data)
+            }
+            setProductsByModelNumber(cache)
+        })
+    }
     const renderHeader = () => {
         return (
             <div className="grid grid-nogutter">
                 <div className="col-6" style={{textAlign: 'left'}}>
                     <Dropdown options={sortOptions} optionLabel="label" placeholder="Sorting"
-                              onChange={onSortChange} className="w-3"/>
+                              onChange={onSortChange} className="w-4"/>
+                </div>
+                <div className="col-6" style={{textAlign: "right"}}>
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        onSubmitGlobalFilter()
+                    }}>
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search"/>
+                            <InputText type="search" value={globalFilterValue}
+                                       onChange={onGlobalFilterChange} placeholder="Search"/>
+                        </span>
+                    </form>
                 </div>
             </div>
         );
@@ -118,18 +151,20 @@ const DataViewDemo = () => {
     return (
         <div className="dataview-demo col-10 ml-auto">
             <div className="card">
-                <DataView value={products.content} header={header}
+                <DataView value={products.content || products} header={header}
                           itemTemplate={itemTemplate} rows={size}/>
             </div>
             <div className="p-paginator p-component p-paginator-bottom">
-                <button type="button" className="p-paginator-first p-paginator-element p-link" disabled={products.first}
+                <button type="button" className="p-paginator-first p-paginator-element p-link"
+                        disabled={products.first}
                         aria-label="First Page">
                     <span className="p-paginator-icon pi pi-angle-double-left"
                           onClick={() => setPage(0)}/>
                 </button>
-                <button type="button" className="p-paginator-prev p-paginator-element p-link" disabled={products.first}
-                        aria-label="Previous Page" onClick={() => setPage(page - 1)}><span
-                    className="p-paginator-icon pi pi-angle-left"/>
+                <button type="button" className="p-paginator-prev p-paginator-element p-link"
+                        disabled={products.first}
+                        aria-label="Previous Page" onClick={() => setPage(page - 1)}>
+                    <span className="p-paginator-icon pi pi-angle-left"/>
                 </button>
                 <span className="p-paginator-pages">
                     <button type="button"
