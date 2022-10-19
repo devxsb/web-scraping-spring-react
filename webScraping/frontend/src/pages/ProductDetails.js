@@ -17,7 +17,7 @@ const ProductDetails = () => {
             product.push(res.data[0])
         })
     }, [])
-
+    let priceFormat = Intl.NumberFormat('tr-TR');
     return (
         <>
             <BreadCrumbDemo val={product.length > 0 && product[0].modelNumber}/>
@@ -25,17 +25,17 @@ const ProductDetails = () => {
                 {product.length > 0 && <div className="product-list-item">
                     <img src={product[0].img} alt={product[0].id} className="w-2"/>
                     <div className="product-list-detail">
-                        <div className="product-name">{product[0].name.replaceAll("-"," ")}</div>
+                        <div className="product-name">{product[0].name.replaceAll("-", " ")}</div>
                     </div>
                     <div className="flex col-12 justify-content-center">
                         {products.map(store => (
                             <div className="col-3" key={store.id}>
-                                <h5>{store.price} TL</h5>
+                                <h5>{priceFormat.format(store.price)} TL</h5>
                                 <a href={store.link} target="blank">
                                     <Button
                                         className="border-bluegray-100 bg-white p-button-raised w-5 align-right">
                                         <img src={"http://localhost:3000/" + store.seller + ".png"}
-                                             className="w-6 m-auto" alt={store.id}/>
+                                             className="w-5 m-auto" alt={store.id}/>
                                     </Button>
                                 </a>
                             </div>

@@ -16,19 +16,12 @@ const DataViewDemo = () => {
     const [products, setProducts] = useState([]);
     const [productsByModelNumber, setProductsByModelNumber] = useState(new Map())
 
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortField, setSortField] = useState(null);
-    const sortOptions = [
-        {label: 'Price High to Low', value: '!price'},
-        {label: 'Price Low to High', value: 'price'},
-    ];
-
     const productService = new ProductService();
-    let [page, setPage] = useState(0)
-    let [size, setSize] = useState(8)
+    const [page, setPage] = useState(0)
+    const [sortValue, setSortValue] = useState(null)
+    const size = 8
     useEffect(() => {
-        productService.getProducts(page, size).then(async res => {
+        productService.getProducts(page, size, sortValue).then(async res => {
             setProducts(res.data)
             const cache = new Map()
             for await (const i of res.data.content) {
@@ -37,25 +30,36 @@ const DataViewDemo = () => {
             }
             setProductsByModelNumber(cache)
         })
-    }, [page, size]);
+    }, [page, sortValue]);
 
+    const sortOptions = [
+        {label: 'Price High to Low', value: '0'},
+        {label: 'Price Low to High', value: '1'},
+        {label: 'Score High to Low', value: '2'},
+        {label: 'Score Low to High', value: '3'},
+    ];
     const onSortChange = (event) => {
         const value = event.value;
-
-        if (value.indexOf('!') === 0) {
-            setSortOrder(-1);
-            setSortField(value.substring(1, value.length));
-            setSortKey(value);
-        } else {
-            setSortOrder(1);
-            setSortField(value);
-            setSortKey(value);
+        switch (value) {
+            case '0' :
+                setSortValue("price,desc")
+                break;
+            case '1':
+                setSortValue("price,asc")
+                break;
+            case '2' :
+                setSortValue("score,desc")
+                break;
+            case '3':
+                setSortValue("score,asc")
+                break;
         }
     }
     const getProductsByModelNumber = (modelNumber) => {
         return productsByModelNumber.get(modelNumber)
     }
     let navigate = useNavigate()
+    let priceFormat = Intl.NumberFormat('tr-TR');
     const renderListItem = (data) => {
         const productsByMN = getProductsByModelNumber(data.modelNumber)
         return (
@@ -71,7 +75,7 @@ const DataViewDemo = () => {
                                 <div className="flex col-12">
                                     {productsByMN.map(store => (
                                         <div className="col-4" key={store.id}>
-                                            <div className="product-price">{store.price} TL</div>
+                                            <div className="product-price">{priceFormat.format(store.price)} TL</div>
                                             <a href={store.link} target="blank">
                                                 <Button
                                                     className="border-bluegray-100 bg-white p-button-raised w-5 align-right">
@@ -104,8 +108,8 @@ const DataViewDemo = () => {
         return (
             <div className="grid grid-nogutter">
                 <div className="col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price"
-                              onChange={onSortChange}/>
+                    <Dropdown options={sortOptions} optionLabel="label" placeholder="Sorting"
+                              onChange={onSortChange} className="w-3"/>
                 </div>
             </div>
         );
@@ -115,8 +119,7 @@ const DataViewDemo = () => {
         <div className="dataview-demo col-10 ml-auto">
             <div className="card">
                 <DataView value={products.content} header={header}
-                          itemTemplate={itemTemplate} rows={size}
-                          sortOrder={sortOrder} sortField={sortField}/>
+                          itemTemplate={itemTemplate} rows={size}/>
             </div>
             <div className="p-paginator p-component p-paginator-bottom">
                 <button type="button" className="p-paginator-first p-paginator-element p-link" disabled={products.first}

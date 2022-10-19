@@ -89,7 +89,7 @@ const CheckboxDemo = () => {
                                 <h5 style={{textAlign: 'start'}}>{category.title}</h5>
                                 {category.value.map(c => {
                                     return (
-                                        <div key={c.key} className="field-checkbox">
+                                        <div key={c.key} className="field-checkbox text-sm">
                                             <Checkbox inputId={c.key} name="category" value={c}
                                                       onChange={onCategoryChange}
                                                       checked={selectedCategories.some((item) => item.key === c.key)}
