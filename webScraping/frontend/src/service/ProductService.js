@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default class ProductService {
-    getProducts() {
-        return axios.get("/product");
+    getProducts(page, size) {
+        return axios.get(`/product?page=${page}&size=${size}`);
     }
 
     getProductsByModelNumber(modelNumber) {

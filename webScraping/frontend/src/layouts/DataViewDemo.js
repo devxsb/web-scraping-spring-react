@@ -25,18 +25,19 @@ const DataViewDemo = () => {
     ];
 
     const productService = new ProductService();
-
+    let [page, setPage] = useState(0)
+    let [size, setSize] = useState(8)
     useEffect(() => {
-        productService.getProducts().then(async res => {
+        productService.getProducts(page, size).then(async res => {
             setProducts(res.data)
             const cache = new Map()
-            for await (const i of res.data) {
+            for await (const i of res.data.content) {
                 const j = await productService.getProductsByModelNumber(i.modelNumber)
                 cache.set(i.modelNumber, j.data)
             }
             setProductsByModelNumber(cache)
         })
-    }, []);
+    }, [page, size]);
 
     const onSortChange = (event) => {
         const value = event.value;
@@ -70,20 +71,20 @@ const DataViewDemo = () => {
                                 <div className="flex col-12">
                                     {productsByMN.map(store => (
                                         <div className="col-4" key={store.id}>
-                                            <h5>{store.price} TL</h5>
+                                            <div className="product-price">{store.price} TL</div>
                                             <a href={store.link} target="blank">
                                                 <Button
                                                     className="border-bluegray-100 bg-white p-button-raised w-5 align-right">
-                                                    <img src={store.seller + ".png"} className="w-5 m-auto" alt={store.id}/>
+                                                    <img src={store.seller + ".png"} className="w-9 m-auto" alt={store.id}/>
                                                 </Button>
                                             </a>
                                         </div>
                                     ))}
                                 </div>) :
-                            <div style={{height: '126.328px'}}/>
+                            <div style={{height: '92.5781px'}}/>
                         }
                     </div>
-                    <Button className="p-button-info"
+                    <Button className="p-button-info p-button-sm"
                             onClick={() => navigate('/product/' + data.name)}>
                         Product details
                     </Button>
@@ -113,9 +114,34 @@ const DataViewDemo = () => {
     return (
         <div className="dataview-demo col-10 ml-auto">
             <div className="card">
-                <DataView value={products} header={header}
-                          itemTemplate={itemTemplate} paginator rows={8}
+                <DataView value={products.content} header={header}
+                          itemTemplate={itemTemplate} rows={size}
                           sortOrder={sortOrder} sortField={sortField}/>
+            </div>
+            <div className="p-paginator p-component p-paginator-bottom">
+                <button type="button" className="p-paginator-first p-paginator-element p-link" disabled={products.first}
+                        aria-label="First Page">
+                    <span className="p-paginator-icon pi pi-angle-double-left"
+                          onClick={() => setPage(0)}/>
+                </button>
+                <button type="button" className="p-paginator-prev p-paginator-element p-link" disabled={products.first}
+                        aria-label="Previous Page" onClick={() => setPage(page - 1)}><span
+                    className="p-paginator-icon pi pi-angle-left"/>
+                </button>
+                <span className="p-paginator-pages">
+                    <button type="button"
+                            className="p-paginator-page p-paginator-element p-link p-paginator-page-start p-highlight"
+                            aria-label="Page 2">{page + 1}
+                    </button>
+                </span>
+                <button type="button" className="p-paginator-next p-paginator-element p-link" aria-label="Next Page"
+                        disabled={products.last} onClick={() => setPage(page + 1)}>
+                    <span className="p-paginator-icon pi pi-angle-right"/>
+                </button>
+                <button type="button" className="p-paginator-last p-paginator-element p-link" aria-label="Last Page"
+                        disabled={products.last} onClick={() => setPage(products.totalPages - 1)}>
+                    <span className="p-paginator-icon pi pi-angle-double-right"/>
+                </button>
             </div>
         </div>
     );
