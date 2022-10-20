@@ -2,10 +2,11 @@ package com.safalifter.ecommerce.controller;
 
 import com.safalifter.ecommerce.model.Product;
 import com.safalifter.ecommerce.service.ProductService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +20,14 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getProducts() {
-        return ResponseEntity.ok(productService.getProducts());
+    public ResponseEntity<?> getProducts(
+            @RequestParam(required = false) String search,
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 8) Pageable page) {
+        return ResponseEntity.ok(productService.getProducts(search, page));
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
+        return ResponseEntity.ok(productService.getProductsByName(name));
     }
 }

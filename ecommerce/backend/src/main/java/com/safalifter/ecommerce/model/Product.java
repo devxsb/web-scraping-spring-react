@@ -20,7 +20,7 @@ public class Product {
     private Long id;
     private String modelNumber;
     private String brand;
-    private String price;
+    private Double price;
     private String ram;
     private String screenSize;
     private String operatingSystem;
