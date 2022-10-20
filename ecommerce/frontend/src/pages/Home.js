@@ -9,9 +9,7 @@ const Home = () => {
             <BreadCrumbDemo/>
             <div className="flex col-11 m-auto">
                 <CheckboxDemo/>
-                <div className="col-10 m-auto">
-                    <DataViewDemo/>
-                </div>
+                <DataViewDemo/>
             </div>
         </div>
     );

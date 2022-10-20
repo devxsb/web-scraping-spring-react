@@ -11,48 +11,62 @@ import ProductService from '../service/ProductService';
 import {Rating} from 'primereact/rating';
 import './DataViewDemo.css';
 import {InputText} from "primereact/inputtext";
+import {useNavigate} from "react-router";
 
 const DataViewDemo = () => {
     const [products, setProducts] = useState(null);
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortField, setSortField] = useState(null);
-    const sortOptions = [
-        {label: 'Price High to Low', value: '!price'},
-        {label: 'Price Low to High', value: 'price'},
-    ];
 
     const productService = new ProductService();
 
-    useEffect(() => {
-        productService.getProducts().then(res => setProducts(res.data));
-    }, []);
+    const [page, setPage] = useState(0)
+    const [sortValue, setSortValue] = useState(null)
+    const [renderFilter, setRenderFilter] = useState(null)
+    const size = 9
 
+    useEffect(() => {
+        productService.getProducts(page, size, sortValue, renderFilter).then(res => setProducts(res.data));
+    }, [page, sortValue, renderFilter]);
+
+    const sortOptions = [
+        {label: 'Price High to Low', value: '0'},
+        {label: 'Price Low to High', value: '1'},
+        {label: 'Score High to Low', value: '2'},
+        {label: 'Score Low to High', value: '3'},
+    ];
     const onSortChange = (event) => {
         const value = event.value;
-
-        if (value.indexOf('!') === 0) {
-            setSortOrder(-1);
-            setSortField(value.substring(1, value.length));
-            setSortKey(value);
-        } else {
-            setSortOrder(1);
-            setSortField(value);
-            setSortKey(value);
+        switch (value) {
+            case '0' :
+                setSortValue("price,desc")
+                break;
+            case '1':
+                setSortValue("price,asc")
+                break;
+            case '2' :
+                setSortValue("score,desc")
+                break;
+            case '3':
+                setSortValue("score,asc")
+                break;
         }
     }
+    let navigate = useNavigate()
+    let priceFormat = Intl.NumberFormat('tr-TR');
     const renderGridItem = (data) => {
         return (
             <div className="col-12 md:col-4">
                 <div className="product-grid-item card">
                     <div className="product-grid-item-content">
                         <img src={data.img} alt={data.id}/>
-                        <div className="product-name">{data.name}</div>
+                        <div className="product-name"
+                             onClick={() => navigate('/product/' + data.name)}
+                             style={{cursor: 'pointer'}}>{data.name.replaceAll("-", " ")}
+                        </div>
                         <Rating value={data.score} className="product-score" readOnly cancel={false}></Rating>
                     </div>
                     <div className="product-grid-item-bottom">
-                        <span className="product-price">{data.price} TL</span>
-                        <Button icon="pi pi-shopping-cart" label="Add to Cart"></Button>
+                        <span className="product-price">{priceFormat.format(data.price)} TL</span>
+                        <Button icon="pi pi-shopping-cart"></Button>
                     </div>
                 </div>
             </div>
@@ -64,19 +78,36 @@ const DataViewDemo = () => {
         }
         return renderGridItem(product);
     }
-
+    const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        setGlobalFilterValue(value);
+    }
+    const onSubmitGlobalFilter = (e) => {
+        productService.getProductsBySearch(globalFilterValue).then(async res => {
+            setProducts(res.data)
+            setRenderFilter(globalFilterValue)
+            setGlobalFilterValue('')
+        })
+    }
     const renderHeader = () => {
         return (
             <div className="grid grid-nogutter">
                 <div className="col-6" style={{textAlign: 'left'}}>
-                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price"
-                              onChange={onSortChange}/>
+                    <Dropdown options={sortOptions} optionLabel="label" placeholder="Sorting"
+                              onChange={onSortChange} className="w-4"/>
                 </div>
                 <div className="col-6" style={{textAlign: "right"}}>
-                   <span className="p-input-icon-left">
-                       <i className="pi pi-search"/>
-                       <InputText type="search" placeholder="Search"/>
-                    </span>
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        onSubmitGlobalFilter()
+                    }}>
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search"/>
+                            <InputText type="search" value={globalFilterValue}
+                                       onChange={onGlobalFilterChange} placeholder="Search"/>
+                        </span>
+                    </form>
                 </div>
             </div>
         );
@@ -85,12 +116,38 @@ const DataViewDemo = () => {
     const header = renderHeader();
 
     return (
-        <div className="dataview-demo">
+        <div className="dataview-demo col-10 ml-auto">
             <div className="card">
-                <DataView value={products} layout="grid" header={header}
-                          itemTemplate={itemTemplate} paginator rows={9}
-                          sortOrder={sortOrder} sortField={sortField}/>
+                <DataView value={products && products.content} layout="grid" header={header}
+                          itemTemplate={itemTemplate} rows={size}/>
             </div>
+            {products && <div className="p-paginator p-component p-paginator-bottom">
+                <button type="button" className="p-paginator-first p-paginator-element p-link"
+                        disabled={products.first}
+                        aria-label="First Page">
+                    <span className="p-paginator-icon pi pi-angle-double-left"
+                          onClick={() => setPage(0)}/>
+                </button>
+                <button type="button" className="p-paginator-prev p-paginator-element p-link"
+                        disabled={products.first}
+                        aria-label="Previous Page" onClick={() => setPage(page - 1)}>
+                    <span className="p-paginator-icon pi pi-angle-left"/>
+                </button>
+                <span className="p-paginator-pages">
+                    <button type="button"
+                            className="p-paginator-page p-paginator-element p-link p-paginator-page-start p-highlight"
+                            aria-label="Page 2">{page + 1}
+                    </button>
+                </span>
+                <button type="button" className="p-paginator-next p-paginator-element p-link" aria-label="Next Page"
+                        disabled={products.last} onClick={() => setPage(page + 1)}>
+                    <span className="p-paginator-icon pi pi-angle-right"/>
+                </button>
+                <button type="button" className="p-paginator-last p-paginator-element p-link" aria-label="Last Page"
+                        disabled={products.last} onClick={() => setPage(products.totalPages - 1)}>
+                    <span className="p-paginator-icon pi pi-angle-double-right"/>
+                </button>
+            </div>}
         </div>
     );
 }
