@@ -38,4 +38,10 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductRequestDto request) {
         return new ResponseEntity<>(productService.createProduct(request), HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<Product> updateProduct(@Valid @RequestBody ProductRequestDto request) {
+        return ResponseEntity.ok(productService.updateProduct(request));
+    }
+
 }

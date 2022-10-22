@@ -70,16 +70,29 @@ const DataTableCrudDemo = () => {
     }
 
     const saveProduct = () => {
+        setSubmitted(true);
+        if (!editMode) {
             productService.createProduct(product).then(res => {
                 products.content.unshift(res.data)
                 setProductDialog(false);
                 setProduct(emptyProduct);
                 toast.current.show({severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000});
             });
+        } else {
+            productService.updateProduct(product).then(() => {
+                setRender(!render)
+                setEditMode(false)
+                setProductDialog(false);
+                setProduct(emptyProduct);
+                toast.current.show({severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
+            })
         }
+    }
 
     const editProduct = (product) => {
-
+        setProduct({...product});
+        setProductDialog(true);
+        setEditMode(true)
     }
 
     const confirmDeleteProduct = (product) => {

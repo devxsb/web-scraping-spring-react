@@ -27,4 +27,13 @@ export default class ProductService {
             }
         });
     }
+
+    updateProduct(body) {
+        return axios.put("/product", body, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+    }
+
 }

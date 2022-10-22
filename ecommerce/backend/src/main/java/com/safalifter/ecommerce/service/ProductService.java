@@ -2,6 +2,7 @@ package com.safalifter.ecommerce.service;
 
 import com.safalifter.ecommerce.dto.DtoConverter;
 import com.safalifter.ecommerce.dto.ProductRequestDto;
+import com.safalifter.ecommerce.exc.NotFoundException;
 import com.safalifter.ecommerce.model.Product;
 import com.safalifter.ecommerce.repository.ProductRepository;
 import org.jsoup.Jsoup;
@@ -47,6 +48,23 @@ public class ProductService {
 
     public Product createProduct(ProductRequestDto request) {
         return productRepository.save(dtoConverter.convert(request));
+    }
+
+    public Product updateProduct(ProductRequestDto request) {
+        Product inDB = productRepository.findById(request.getId()).orElseThrow(() ->
+                new NotFoundException("Product not found"));
+        inDB.setBrand(request.getBrand());
+        inDB.setDiskCapacity(request.getDiskCapacity());
+        inDB.setDiskType(request.getDiskType());
+        inDB.setImg(request.getImg());
+        inDB.setModelNumber(request.getModelNumber());
+        inDB.setName(request.getName());
+        inDB.setOperatingSystem(request.getOperatingSystem());
+        inDB.setProcessorTechnology(request.getProcessorTechnology());
+        inDB.setRam(request.getRam());
+        inDB.setScreenSize(request.getScreenSize());
+        inDB.setPrice(request.getPrice());
+        return productRepository.save(inDB);
     }
 
     public void scrapeProductByPage(int page) {
