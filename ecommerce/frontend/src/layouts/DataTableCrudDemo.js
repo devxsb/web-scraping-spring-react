@@ -96,11 +96,17 @@ const DataTableCrudDemo = () => {
     }
 
     const confirmDeleteProduct = (product) => {
-
+        setProduct(product);
+        setDeleteProductDialog(true);
     }
 
     const deleteProduct = () => {
-
+        productService.deleteProduct(product.id).then(() => {
+            setRender(!render)
+            setDeleteProductDialog(false)
+            setProduct(emptyProduct)
+            toast.current.show({severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
+        })
     }
 
     const onInputChange = (e, name) => {
@@ -245,7 +251,7 @@ const DataTableCrudDemo = () => {
                 }
             </div>
 
-            <Dialog visible={productDialog} style={{height: '650px'}} header="Product Details" modal className="p-fluid"
+            <Dialog visible={productDialog} style={{height: '625px'}} header="Product Details" modal className="p-fluid"
                     footer={productDialogFooter} onHide={hideDialog}>
                 <div className="field">
                     <label htmlFor="name">Name</label>

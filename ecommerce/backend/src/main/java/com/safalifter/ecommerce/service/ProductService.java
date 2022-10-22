@@ -67,6 +67,11 @@ public class ProductService {
         return productRepository.save(inDB);
     }
 
+    public String deleteProduct(Long id) {
+        productRepository.deleteById(id);
+        return "Product successfully deleted";
+    }
+
     public void scrapeProductByPage(int page) {
         final String url = "https://www.vatanbilgisayar.com/laptop/?page=" + page;
         try {

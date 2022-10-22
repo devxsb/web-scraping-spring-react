@@ -36,4 +36,11 @@ export default class ProductService {
         });
     }
 
+    deleteProduct(id) {
+        return axios.delete("/product/" + id, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+    }
 }
