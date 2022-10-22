@@ -24,7 +24,7 @@ const DataViewDemo = () => {
     const size = 9
 
     useEffect(() => {
-        productService.getProducts(page, size, sortValue, renderFilter).then(res => setProducts(res.data));
+        productService.getProducts(page, size, renderFilter,sortValue).then(res => setProducts(res.data));
     }, [page, sortValue, renderFilter]);
 
     const sortOptions = [

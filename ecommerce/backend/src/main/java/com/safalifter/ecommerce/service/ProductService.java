@@ -1,5 +1,7 @@
 package com.safalifter.ecommerce.service;
 
+import com.safalifter.ecommerce.dto.DtoConverter;
+import com.safalifter.ecommerce.dto.ProductRequestDto;
 import com.safalifter.ecommerce.model.Product;
 import com.safalifter.ecommerce.repository.ProductRepository;
 import org.jsoup.Jsoup;
@@ -16,9 +18,11 @@ import java.util.List;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final DtoConverter dtoConverter;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, DtoConverter dtoConverter) {
         this.productRepository = productRepository;
+        this.dtoConverter = dtoConverter;
     }
 
     public Object getProducts(String search, Pageable page) {
@@ -39,6 +43,10 @@ public class ProductService {
         else
             System.err.println("Search not found: " + searchValue);
         return null;
+    }
+
+    public Product createProduct(ProductRequestDto request) {
+        return productRepository.save(dtoConverter.convert(request));
     }
 
     public void scrapeProductByPage(int page) {

@@ -1,13 +1,16 @@
 package com.safalifter.ecommerce.controller;
 
+import com.safalifter.ecommerce.dto.ProductRequestDto;
 import com.safalifter.ecommerce.model.Product;
 import com.safalifter.ecommerce.service.ProductService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,5 +32,10 @@ public class ProductController {
     @GetMapping("/{name}")
     public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
         return ResponseEntity.ok(productService.getProductsByName(name));
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductRequestDto request) {
+        return new ResponseEntity<>(productService.createProduct(request), HttpStatus.CREATED);
     }
 }
