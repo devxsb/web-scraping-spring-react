@@ -28,9 +28,9 @@ const DataViewDemo = () => {
     useEffect(() => {
         {
             filter ?
-                productService.getProductsByFilter(filter, page, size).then(res => setProducts(res.data)) :
+                productService.getProductsByFilter(filter, page, size, sortValue).then(res => setProducts(res.data)) :
                 renderFilter ?
-                    productService.getProductsBySearch(renderFilter, page, size).then(res => setProducts(res.data)) :
+                    productService.getProductsBySearch(renderFilter, page, size, sortValue).then(res => setProducts(res.data)) :
                     productService.getProducts(page, size, sortValue).then(res => setProducts(res.data));
         }
     }, [page, sortValue, renderFilter, filter]);
@@ -86,6 +86,7 @@ const DataViewDemo = () => {
         }
         return renderGridItem(product);
     }
+
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const onGlobalFilterChange = (e) => {
         const value = e.target.value;
@@ -95,6 +96,7 @@ const DataViewDemo = () => {
         setRenderFilter(globalFilterValue)
         setGlobalFilterValue('')
     }
+
     const renderHeader = () => {
         return (
             <div className="grid grid-nogutter">

@@ -7,8 +7,10 @@ export default class ProductService {
             `/product?page=${page}&size=${size}`);
     }
 
-    getProductsBySearch(value, page, size) {
-        return axios.get(`/product/search/${value}?page=${page}&size=${size}`)
+    getProductsBySearch(value, page, size, sortValue) {
+        return axios.get(sortValue ?
+            `/product/search/${value}?page=${page}&size=${size}&sort=${sortValue}` :
+            `/product/search/${value}?page=${page}&size=${size}`)
     }
 
     getProductByName(name) {
@@ -39,7 +41,9 @@ export default class ProductService {
         });
     }
 
-    getProductsByFilter(value, page, size) {
-        return axios.get(`/product/filter/${value}?page=${page}&size=${size}`)
+    getProductsByFilter(value, page, size, sortValue) {
+        return axios.get(sortValue ?
+            `/product/filter/${value}?page=${page}&size=${size}&sort=${sortValue}` :
+            `/product/filter/${value}?page=${page}&size=${size}`)
     }
 }
