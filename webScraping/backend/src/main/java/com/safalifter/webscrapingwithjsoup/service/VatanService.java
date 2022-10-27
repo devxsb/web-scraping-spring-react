@@ -33,7 +33,8 @@ public class VatanService {
                 final String modelNumber = doc.select("div.product-list__product-code.pull-left.product-id").attr("data-productcode");
                 final String brand = doc.select("a.bradcrumb-item").get(3).text();
                 final Double price = Double.parseDouble(doc.select("div.d-cell.col-sm-3.col-xs-3.short-price span.product-list__price").text()
-                        .replace(".", ""));
+                        .replace(".", "")
+                        .replace(",", ""));
                 final Double score = Double.parseDouble(doc.select("strong#averageRankNum").text());
                 final String name = doc.select("h1.product-list__product-name").text();
                 final String img = e.select("img.lazyimg").attr("data-src");
@@ -90,7 +91,7 @@ public class VatanService {
         do {
             scrapeProductByPage(i);
             i++;
-        } while (i < 1); // only 1 page for test
+        } while (i < 15); // only 1 page for test
     }
 
     public List<Product> getProducts() {

@@ -29,7 +29,8 @@ public class TeknosaService {
                     e.select("h3.prd-title.prd-title-style").text().contains(modelNumber)) {
                 final Double price = Double.parseDouble(e.select("div.prd-prc2 span").text()
                         .split(" ")[0]
-                        .replace(".", ""));
+                        .replace(".", "")
+                        .replace(",", ""));
                 final Double score; // will be solved
                 final String link = "https://www.teknosa.com/" + e.select("a.prd-link").attr("href");
                 final String img = e.select("div.prd-media img").attr("data-srcset");

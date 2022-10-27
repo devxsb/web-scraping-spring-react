@@ -22,17 +22,20 @@ public class ProductService {
     private final TeknosaService teknosaService;
     private final TrendyolService trendyolService;
     private final N11Service n11Service;
+    private final ECommerceService eCommerceService;
 
     public ProductService(ProductRepository productRepository,
                           @Lazy VatanService vatanService,
                           @Lazy TeknosaService teknosaService,
                           @Lazy TrendyolService trendyolService,
-                          @Lazy N11Service n11Service) {
+                          @Lazy N11Service n11Service,
+                          @Lazy ECommerceService eCommerceService) {
         this.productRepository = productRepository;
         this.vatanService = vatanService;
         this.teknosaService = teknosaService;
         this.trendyolService = trendyolService;
         this.n11Service = n11Service;
+        this.eCommerceService = eCommerceService;
     }
 
     public Object getProducts(String modelNumber, String search, Pageable page) {
@@ -129,5 +132,7 @@ public class ProductService {
         trendyolService.scrapeProducts();
         log.info("n11 scraping started");
         n11Service.scrapeProducts();
+        log.info("ecommerce scraping started");
+        eCommerceService.scrapeProducts();
     }
 }
