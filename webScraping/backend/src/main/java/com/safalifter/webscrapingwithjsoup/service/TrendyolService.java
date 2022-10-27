@@ -8,7 +8,6 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.UUID;
 
 @Service
 public class TrendyolService {
@@ -40,7 +39,6 @@ public class TrendyolService {
                 final String img = e.select("img").attr("src");
                 final Product prd = vatanService.getProductByModelNumber(modelNumber);
                 final Product product = Product.builder()
-                        .id(UUID.randomUUID())
                         .modelNumber(prd.getModelNumber())
                         .brand(prd.getBrand())
                         .ram(prd.getRam())

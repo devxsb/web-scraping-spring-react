@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30b90e00-0bc8-442d-9bbe-4961f68dc742" name="Changes" comment="product details page added" />
+    <list default="true" id="30b90e00-0bc8-442d-9bbe-4961f68dc742" name="Changes" comment="product details page added">
+      <change afterPath="$PROJECT_DIR$/../../ecommerce/backend/dev db.trace.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ecommerce/frontend/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/MultiSelectDemo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/MultiSelectDemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/backend/dev db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/backend/dev db.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/backend/src/main/java/com/safalifter/ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/backend/src/main/java/com/safalifter/ecommerce/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/backend/src/main/java/com/safalifter/ecommerce/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/backend/src/main/java/com/safalifter/ecommerce/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/backend/src/main/java/com/safalifter/ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/backend/src/main/java/com/safalifter/ecommerce/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/BreadCrumbDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/BreadCrumbDemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/CheckBoxDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/CheckBoxDemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/DataTableCrudDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/DataTableCrudDemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/DataViewDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/DataViewDemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/FormikFormDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/FormikFormDemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/pages/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/redux/authSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/redux/reduxSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/redux/configureStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/redux/configureStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/service/ProductService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/service/ProductService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/service/ProductService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,7 +42,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -31,26 +55,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/safalifter/Desktop/project/yazlab/yazlab1/webScrapingWithJsoup/frontend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/safalifter/Desktop/project/yazlab/yazlab1/webScrapingWithJsoup/frontend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -82,6 +106,10 @@
       <workItem from="1665915853390" duration="9000" />
       <workItem from="1665915876613" duration="651000" />
       <workItem from="1665942257080" duration="15371000" />
+      <workItem from="1666610196980" duration="783000" />
+      <workItem from="1666801643607" duration="1645000" />
+      <workItem from="1666837327691" duration="132000" />
+      <workItem from="1666854971243" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="made some improvements for frontend">
       <created>1665910469593</created>

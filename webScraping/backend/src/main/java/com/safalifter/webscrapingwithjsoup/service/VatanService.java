@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class VatanService {
@@ -64,7 +63,6 @@ public class VatanService {
                         }
                     }
                 }
-                product.setId(UUID.randomUUID());
                 product.setModelNumber(modelNumber);
                 product.setBrand(brand);
                 product.setPrice(price);
@@ -92,7 +90,7 @@ public class VatanService {
         do {
             scrapeProductByPage(i);
             i++;
-        } while (i < 10); // only 1 page for test
+        } while (i < 1); // only 1 page for test
     }
 
     public List<Product> getProducts() {
