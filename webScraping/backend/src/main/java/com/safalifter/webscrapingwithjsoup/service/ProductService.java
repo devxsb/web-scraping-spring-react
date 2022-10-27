@@ -62,12 +62,12 @@ public class ProductService {
     // 3 most affordable sites
     public List<Product> getProductsByModelNumber(String modelNumber) {
         if (productRepository.findProductsByModelNumberOrderByPrice(modelNumber).size() > 3)
-            return productRepository.findProductsByModelNumberOrderByPrice(modelNumber).subList(0, 2);
+            return productRepository.findProductsByModelNumberOrderByPrice(modelNumber).subList(0, 3);
         return productRepository.findProductsByModelNumberOrderByPrice(modelNumber);
     }
 
     public List<Product> getProductsByName(String name) {
-        return productRepository.findProductsByName(name);
+        return productRepository.findProductsByNameOrderByPriceAsc(name);
     }
 
     public Page<Product> getProductsByFilter(String value, Pageable page) {
@@ -122,7 +122,7 @@ public class ProductService {
         return null;
     }
 
-    @Bean
+   @Bean
     public void scrape() {
         log.info("vatan scraping started");
         vatanService.scrapeProducts();

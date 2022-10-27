@@ -106,7 +106,7 @@ const MultiSelectDemo = () => {
     }
 
     return (
-        <div className="multiselect-demo mt-3">
+        <div className="multiselect-demo mt-3 mr-5">
             <p className="header">Filter</p>
             <MultiSelect value={selectedBrand} options={brand}
                          onChange={(e) => setSelectedBrand(e.value)}

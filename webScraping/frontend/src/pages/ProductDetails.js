@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ProductService from "../service/ProductService";
 import {useParams} from "react-router-dom";
-import {Column, DataTable} from "primereact";
+import {Column, DataTable, Rating} from "primereact";
 import BreadCrumbDemo from "../layouts/BreadCrumbDemo";
 import {Button} from "primereact/button";
 
@@ -31,9 +31,14 @@ const ProductDetails = () => {
                         {products.map(store => (
                             <div className="col-3" key={store.id}>
                                 <h5>{priceFormat.format(store.price)} TL</h5>
+                                <Rating value={store.score}
+                                        className="product-score mx-auto justify-content-center w-1"
+                                        readOnly
+                                        cancel={false}></Rating>
                                 <a href={store.link} target="blank">
                                     <Button
-                                        className="border-bluegray-100 bg-white p-button-raised w-5 align-right">
+                                        className="border-bluegray-100 bg-white p-button-raised w-5 align-right mt-2"
+                                        style={{height: "35px"}}>
                                         <img src={"http://localhost:3000/" + store.seller + ".png"}
                                              className="w-5 m-auto" alt={store.id}/>
                                     </Button>

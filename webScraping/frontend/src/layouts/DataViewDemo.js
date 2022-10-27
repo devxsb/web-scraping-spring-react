@@ -11,7 +11,7 @@ import ProductService from '../service/ProductService';
 import './DataViewDemo.css';
 import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
-import {InputText} from "primereact";
+import {InputText, Rating} from "primereact";
 import {useSelector} from "react-redux";
 
 const DataViewDemo = () => {
@@ -93,9 +93,13 @@ const DataViewDemo = () => {
                                     {productsByMN.map(store => (
                                         <div className="col-4" key={store.id}>
                                             <div className="product-price">{priceFormat.format(store.price)} TL</div>
+                                            <Rating value={store.score}
+                                                    className="product-score mx-auto justify-content-center w-1"
+                                                    readOnly
+                                                    cancel={false}></Rating>
                                             <a href={store.link} target="blank">
                                                 <Button
-                                                    className="border-bluegray-100 bg-white p-button-raised w-5 align-right">
+                                                    className="border-bluegray-100 bg-white p-button-raised w-5 align-right mt-1" style={{height:"35px"}}>
                                                     <img src={store.seller + ".png"} className="w-8 m-auto" alt={store.id}/>
                                                 </Button>
                                             </a>

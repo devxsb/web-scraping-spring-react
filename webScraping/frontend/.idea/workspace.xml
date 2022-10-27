@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30b90e00-0bc8-442d-9bbe-4961f68dc742" name="Changes" comment="product details page added">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/MultiSelectDemo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../ecommerce/frontend/src/layouts/MultiSelectDemo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/repository/ProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/safalifter/webscrapingwithjsoup/service/ProductService.java" afterDir="false" />
     </list>
@@ -35,26 +37,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/safalifter/Desktop/project/yazlab/yazlab1/webScrapingWithJsoup/webScraping/frontend/src/layouts",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/safalifter/Desktop/project/yazlab/yazlab1/webScrapingWithJsoup/webScraping/frontend/src/layouts&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/layouts" />
@@ -95,7 +97,10 @@
       <workItem from="1666801643607" duration="1645000" />
       <workItem from="1666837327691" duration="132000" />
       <workItem from="1666854971243" duration="10000" />
-      <workItem from="1666861848980" duration="1364000" />
+      <workItem from="1666861848980" duration="2711000" />
+      <workItem from="1666882240714" duration="298000" />
+      <workItem from="1666891666053" duration="1461000" />
+      <workItem from="1666894766814" duration="659000" />
     </task>
     <task id="LOCAL-00001" summary="made some improvements for frontend">
       <created>1665910469593</created>
