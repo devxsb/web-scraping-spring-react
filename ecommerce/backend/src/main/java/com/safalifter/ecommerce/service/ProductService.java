@@ -5,6 +5,7 @@ import com.safalifter.ecommerce.dto.ProductRequestDto;
 import com.safalifter.ecommerce.exc.NotFoundException;
 import com.safalifter.ecommerce.model.Product;
 import com.safalifter.ecommerce.repository.ProductRepository;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Log4j2
 public class ProductService {
     private final ProductRepository productRepository;
     private final DtoConverter dtoConverter;
@@ -178,6 +180,7 @@ public class ProductService {
 
     @Bean
     public void scrapeProducts() {
+        log.info("scraping started");
         int i = 1;
         do {
             scrapeProductByPage(i);
