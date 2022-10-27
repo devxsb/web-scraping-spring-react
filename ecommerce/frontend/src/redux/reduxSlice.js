@@ -1,10 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-export const authSlice = createSlice({
+export const reduxSlice = createSlice({
     name: 'auth',
     initialState: {
         currentUser: localStorage.getItem('currentUser'),
-        token: localStorage.getItem('token')
+        token: localStorage.getItem('token'),
+        filter: undefined
     },
     reducers: {
         login: (state, action) => {
@@ -18,8 +19,11 @@ export const authSlice = createSlice({
             localStorage.removeItem('token')
             state.currentUser = undefined
             state.token = undefined
+        },
+        filter: (state, action) => {
+            state.filter = action.payload
         }
     }
 })
-export const {login, logout} = authSlice.actions
-export default authSlice.reducer
+export const {login, logout, filter} = reduxSlice.actions
+export default reduxSlice.reducer

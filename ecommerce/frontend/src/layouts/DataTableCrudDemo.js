@@ -128,7 +128,7 @@ const DataTableCrudDemo = () => {
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew}/>
+                <Button label="New" icon="pi pi-plus" className="p-button-success mr-2 p-button-sm" onClick={openNew}/>
             </React.Fragment>
         )
     }
@@ -195,60 +195,54 @@ const DataTableCrudDemo = () => {
             <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteProduct}/>
         </React.Fragment>
     );
-
     return (
         <div className="datatable-crud-demo">
             <Toast ref={toast}/>
             <div className="card col-11 m-auto">
-                {products &&
-                    <>
-                        <DataTable ref={dt} value={products.content} selection={selectedProducts}
-                                   onSelectionChange={(e) => setSelectedProducts(e.value)}
-                                   dataKey="id" rows={size}
-                                   header={header} responsiveLayout="scroll">
-                            <Column field="img" header="Image" body={imageBodyTemplate}></Column>
-                            <Column field="modelNumber" header="Model Number"></Column>
-                            <Column field="brand" header="Brand" style={{minWidth: '5rem'}}></Column>
-                            <Column field="processorTechnology" header="Processor"></Column>
-                            <Column field="operatingSystem" header="Operating System"></Column>
-                            <Column field="screenSize" header="Screen Size"></Column>
-                            <Column field="diskCapacity" header="Disk (SSD)"></Column>
-                            <Column field="ram" header="Ram" style={{minWidth: '10rem'}}></Column>
-                            <Column field="price" header="Price" style={{minWidth: '7rem'}}
-                                    body={priceBodyTemplate}></Column>
-                            <Column body={actionBodyTemplate}></Column>
-                        </DataTable>
-                        <div className="p-paginator p-component p-paginator-bottom">
-                            <button type="button" className="p-paginator-first p-paginator-element p-link"
-                                    disabled={products.first}
-                                    aria-label="First Page">
+                <DataTable ref={dt} value={products ? products.content : null} selection={selectedProducts}
+                           onSelectionChange={(e) => setSelectedProducts(e.value)}
+                           dataKey="id" rows={size}
+                           header={header} responsiveLayout="scroll">
+                    <Column field="img" header="Image" body={imageBodyTemplate}></Column>
+                    <Column field="modelNumber" header="Model Number"></Column>
+                    <Column field="brand" header="Brand"></Column>
+                    <Column field="processorTechnology" header="Processor"></Column>
+                    <Column field="operatingSystem" header="Operating System"></Column>
+                    <Column field="screenSize" header="Screen Size"></Column>
+                    <Column field="diskCapacity" header="Disk (SSD)"></Column>
+                    <Column field="ram" header="Ram"></Column>
+                    <Column field="price" header="Price" body={priceBodyTemplate}></Column>
+                    <Column body={actionBodyTemplate}></Column>
+                </DataTable>
+                {products && <div className="p-paginator p-component p-paginator-bottom">
+                    <button type="button" className="p-paginator-first p-paginator-element p-link"
+                            disabled={products.first}
+                            aria-label="First Page">
                                 <span className="p-paginator-icon pi pi-angle-double-left"
                                       onClick={() => setPage(0)}/>
-                            </button>
-                            <button type="button" className="p-paginator-prev p-paginator-element p-link"
-                                    disabled={products.first}
-                                    aria-label="Previous Page" onClick={() => setPage(page - 1)}>
-                                <span className="p-paginator-icon pi pi-angle-left"/>
-                            </button>
-                            <span className="p-paginator-pages">
+                    </button>
+                    <button type="button" className="p-paginator-prev p-paginator-element p-link"
+                            disabled={products.first}
+                            aria-label="Previous Page" onClick={() => setPage(page - 1)}>
+                        <span className="p-paginator-icon pi pi-angle-left"/>
+                    </button>
+                    <span className="p-paginator-pages">
                                  <button type="button"
                                          className="p-paginator-page p-paginator-element p-link p-paginator-page-start p-highlight"
                                          aria-label="Page 2">{page + 1}
                                  </button>
                             </span>
-                            <button type="button" className="p-paginator-next p-paginator-element p-link"
-                                    aria-label="Next Page"
-                                    disabled={products.last} onClick={() => setPage(page + 1)}>
-                                <span className="p-paginator-icon pi pi-angle-right"/>
-                            </button>
-                            <button type="button" className="p-paginator-last p-paginator-element p-link"
-                                    aria-label="Last Page"
-                                    disabled={products.last} onClick={() => setPage(products.totalPages - 1)}>
-                                <span className="p-paginator-icon pi pi-angle-double-right"/>
-                            </button>
-                        </div>
-                    </>
-                }
+                    <button type="button" className="p-paginator-next p-paginator-element p-link"
+                            aria-label="Next Page"
+                            disabled={products.last} onClick={() => setPage(page + 1)}>
+                        <span className="p-paginator-icon pi pi-angle-right"/>
+                    </button>
+                    <button type="button" className="p-paginator-last p-paginator-element p-link"
+                            aria-label="Last Page"
+                            disabled={products.last} onClick={() => setPage(products.totalPages - 1)}>
+                        <span className="p-paginator-icon pi pi-angle-double-right"/>
+                    </button>
+                </div>}
             </div>
 
             <Dialog visible={productDialog} style={{height: '625px'}} header="Product Details" modal className="p-fluid"

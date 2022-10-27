@@ -14,7 +14,7 @@ import './FormDemo.css';
 import AuthService from "../service/AuthService";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {login} from "../redux/authSlice";
+import {login} from "../redux/reduxSlice";
 
 export const FormikFormDemo = () => {
     const [error, setError] = useState(false);

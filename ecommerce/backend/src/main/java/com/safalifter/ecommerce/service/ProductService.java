@@ -10,10 +10,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,24 +28,8 @@ public class ProductService {
         this.dtoConverter = dtoConverter;
     }
 
-    public Object getProducts(String search, Pageable page) {
-        if (search != null)
-            return getProductsBySearch(search, page);
+    public Page<Product> getProducts(Pageable page) {
         return productRepository.findAll(page);
-    }
-
-    public Object getProductsBySearch(String searchValue, Pageable page) {
-        if (productRepository.findProductsByNameContainsIgnoreCase(
-                searchValue.replaceAll(" ", "-"), page).getTotalElements() > 0)
-            return productRepository.findProductsByNameContainsIgnoreCase(
-                    searchValue.replaceAll(" ", "-"), page);
-        else if (productRepository.findProductByModelNumber(
-                searchValue) != null)
-            return productRepository.findProductByModelNumber(
-                    searchValue);
-        else
-            System.err.println("Search not found: " + searchValue);
-        return null;
     }
 
     public Product createProduct(ProductRequestDto request) {
@@ -70,6 +56,60 @@ public class ProductService {
     public String deleteProduct(Long id) {
         productRepository.deleteById(id);
         return "Product successfully deleted";
+    }
+
+    public List<Product> getProductsByName(String name) {
+        return productRepository.findProductsByName(name);
+    }
+
+    public Object getProductsBySearch(String searchValue, Pageable page) {
+        if (productRepository.findProductsByNameContainsIgnoreCase(
+                searchValue.replaceAll(" ", "-"), page).getTotalElements() > 0)
+            return productRepository.findProductsByNameContainsIgnoreCase(
+                    searchValue.replaceAll(" ", "-"), page);
+        else if (productRepository.findProductByModelNumber(
+                searchValue) != null)
+            return productRepository.findProductByModelNumber(
+                    searchValue);
+        else if (productRepository.findProductsByBrandContainsIgnoreCase(
+                searchValue.replaceAll(" ", "-"), page).getTotalElements() > 0)
+            return productRepository.findProductsByBrandContainsIgnoreCase(
+                    searchValue.replaceAll(" ", "-"), page);
+        else
+            System.err.println("Search not found: " + searchValue);
+        return null;
+    }
+
+    public Page<Product> getProductsByFilter(String value, Pageable page) {
+        String[] filter = value.toLowerCase().split("&");
+
+        List<String> brandFilters = new ArrayList<>();
+        List<String> processorBrandFilters = new ArrayList<>();
+        List<String> processorTechnologyFilters = new ArrayList<>();
+        List<String> operatingSystemFilters = new ArrayList<>();
+        List<String> screenSizeFilters = new ArrayList<>();
+        List<String> diskFilters = new ArrayList<>();
+        List<String> ramFilters = new ArrayList<>();
+
+        for (String x : filter) {
+            String[] y = x.replace("-", " ").split("=");
+            if ("brand".equals(y[0])) {
+                brandFilters.add(y[1]);
+            } else if ("processorbrand".equals(y[0])) {
+                processorBrandFilters.add(y[1]);
+            } else if ("processortechnology".equals(y[0])) {
+                processorTechnologyFilters.add(y[1]);
+            } else if ("operatingsystem".equals(y[0])) {
+                operatingSystemFilters.add(y[1]);
+            } else if ("screensize".equals(y[0])) {
+                screenSizeFilters.add(y[1]);
+            } else if ("disk".equals(y[0])) {
+                diskFilters.add(y[1]);
+            } else if ("ram".equals(y[0])) {
+                ramFilters.add(y[1]);
+            }
+        }
+        return productRepository.findProductsByFilter(brandFilters, processorBrandFilters, processorTechnologyFilters, operatingSystemFilters, screenSizeFilters, diskFilters, ramFilters, page);
     }
 
     public void scrapeProductByPage(int page) {
@@ -134,10 +174,6 @@ public class ProductService {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-    }
-
-    public List<Product> getProductsByName(String name) {
-        return productRepository.findProductsByName(name);
     }
 
     @Bean

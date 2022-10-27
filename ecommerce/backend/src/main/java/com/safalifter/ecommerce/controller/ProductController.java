@@ -3,6 +3,7 @@ package com.safalifter.ecommerce.controller;
 import com.safalifter.ecommerce.dto.ProductRequestDto;
 import com.safalifter.ecommerce.model.Product;
 import com.safalifter.ecommerce.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -24,9 +25,8 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<?> getProducts(
-            @RequestParam(required = false) String search,
-            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 8) Pageable page) {
-        return ResponseEntity.ok(productService.getProducts(search, page));
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 9) Pageable page) {
+        return ResponseEntity.ok(productService.getProducts(page));
     }
 
     @GetMapping("/{name}")
@@ -47,5 +47,19 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productService.deleteProduct(id));
+    }
+
+    @GetMapping("/search/{value}")
+    public ResponseEntity<Object> getProductsBySearch(
+            @PathVariable String value,
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 9) Pageable page) {
+        return ResponseEntity.ok(productService.getProductsBySearch(value, page));
+    }
+
+    @GetMapping("/filter/{value}")
+    public ResponseEntity<Page<Product>> getProductsByFilter(
+            @PathVariable String value,
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 9) Pageable page) {
+        return ResponseEntity.ok(productService.getProductsByFilter(value, page));
     }
 }

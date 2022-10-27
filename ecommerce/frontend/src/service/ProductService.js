@@ -1,19 +1,14 @@
 import axios from "axios";
 
 export default class ProductService {
-    getProducts(page, size, renderFilter, sortValue) {
-        if (!renderFilter)
-            return axios.get(sortValue ?
-                `/product?page=${page}&size=${size}&sort=${sortValue}` :
-                `/product?page=${page}&size=${size}`);
-        else
-            return axios.get(sortValue ?
-                `/product?page=${page}&size=${size}&sort=${sortValue}&search=${renderFilter}` :
-                `/product?page=${page}&size=${size}&search=${renderFilter}`);
+    getProducts(page, size, sortValue) {
+        return axios.get(sortValue ?
+            `/product?page=${page}&size=${size}&sort=${sortValue}` :
+            `/product?page=${page}&size=${size}`);
     }
 
-    getProductsBySearch(value) {
-        return axios.get("/product?search=" + value);
+    getProductsBySearch(value, page, size) {
+        return axios.get(`/product/search/${value}?page=${page}&size=${size}`)
     }
 
     getProductByName(name) {
@@ -42,5 +37,9 @@ export default class ProductService {
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
             }
         });
+    }
+
+    getProductsByFilter(value, page, size) {
+        return axios.get(`/product/filter/${value}?page=${page}&size=${size}`)
     }
 }

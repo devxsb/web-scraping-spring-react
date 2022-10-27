@@ -12,11 +12,13 @@ import {Rating} from 'primereact/rating';
 import './DataViewDemo.css';
 import {InputText} from "primereact/inputtext";
 import {useNavigate} from "react-router";
+import {useSelector} from "react-redux";
 
 const DataViewDemo = () => {
     const [products, setProducts] = useState(null);
 
     const productService = new ProductService();
+    const filter = useSelector(state => state.reduxSlice.filter)
 
     const [page, setPage] = useState(0)
     const [sortValue, setSortValue] = useState(null)
@@ -24,8 +26,14 @@ const DataViewDemo = () => {
     const size = 9
 
     useEffect(() => {
-        productService.getProducts(page, size, renderFilter,sortValue).then(res => setProducts(res.data));
-    }, [page, sortValue, renderFilter]);
+        {
+            filter ?
+                productService.getProductsByFilter(filter, page, size).then(res => setProducts(res.data)) :
+                renderFilter ?
+                    productService.getProductsBySearch(renderFilter, page, size).then(res => setProducts(res.data)) :
+                    productService.getProducts(page, size, sortValue).then(res => setProducts(res.data));
+        }
+    }, [page, sortValue, renderFilter, filter]);
 
     const sortOptions = [
         {label: 'Price High to Low', value: '0'},
@@ -84,11 +92,8 @@ const DataViewDemo = () => {
         setGlobalFilterValue(value);
     }
     const onSubmitGlobalFilter = (e) => {
-        productService.getProductsBySearch(globalFilterValue).then(async res => {
-            setProducts(res.data)
-            setRenderFilter(globalFilterValue)
-            setGlobalFilterValue('')
-        })
+        setRenderFilter(globalFilterValue)
+        setGlobalFilterValue('')
     }
     const renderHeader = () => {
         return (

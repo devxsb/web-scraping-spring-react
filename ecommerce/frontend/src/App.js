@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import {useSelector} from "react-redux";
 
 function App() {
-    const currentUser = useSelector(state => state.authSlice.currentUser)
+    const currentUser = useSelector(state => state.reduxSlice.currentUser)
     return (
         <div className="App">
             <Routes>

@@ -9,10 +9,10 @@ import {BreadCrumb} from 'primereact/breadcrumb';
 import {useNavigate} from "react-router";
 import {Button} from "primereact/button";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../redux/authSlice";
+import {logout} from "../redux/reduxSlice";
 
 const BreadCrumbDemo = ({val}) => {
-    const currentUser = useSelector(state => state.authSlice.currentUser)
+    const currentUser = useSelector(state => state.reduxSlice.currentUser)
     const dispatch = useDispatch()
     let items;
     {
