@@ -23,4 +23,10 @@ export default class ProductService {
     getProductsBySearch(value) {
         return axios.get("/product?search=" + value);
     }
+
+    getProductsByFilter(value, page, size, sortValue) {
+        return axios.get(sortValue ?
+            `/product/filter/${value}?page=${page}&size=${size}&sort=${sortValue}` :
+            `/product/filter/${value}?page=${page}&size=${size}`)
+    }
 }

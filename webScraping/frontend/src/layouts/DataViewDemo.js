@@ -12,11 +12,13 @@ import './DataViewDemo.css';
 import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
 import {InputText} from "primereact";
+import {useSelector} from "react-redux";
 
 const DataViewDemo = () => {
     const [products, setProducts] = useState([]);
     const [productsByModelNumber, setProductsByModelNumber] = useState(new Map())
 
+    const filter = useSelector(state => state.reduxSlice.filter)
     const productService = new ProductService();
     const [page, setPage] = useState(0)
     const [sortValue, setSortValue] = useState(null)
@@ -24,16 +26,28 @@ const DataViewDemo = () => {
     const size = 8
 
     useEffect(() => {
-        productService.getProducts(page, size, sortValue, renderFilter).then(async res => {
-            setProducts(res.data)
-            const cache = new Map()
-            for await (const i of res.data.content) {
-                const j = await productService.getProductsByModelNumber(i.modelNumber)
-                cache.set(i.modelNumber, j.data)
-            }
-            setProductsByModelNumber(cache)
-        })
-    }, [page, sortValue, renderFilter]);
+        {
+            filter ?
+                productService.getProductsByFilter(filter, page, size, sortValue).then(async res => {
+                    setProducts(res.data)
+                    const cache = new Map()
+                    for await (const i of res.data.content) {
+                        const j = await productService.getProductsByModelNumber(i.modelNumber)
+                        cache.set(i.modelNumber, j.data)
+                    }
+                    setProductsByModelNumber(cache)
+                }) :
+                productService.getProducts(page, size, sortValue, renderFilter).then(async res => {
+                    setProducts(res.data)
+                    const cache = new Map()
+                    for await (const i of res.data.content) {
+                        const j = await productService.getProductsByModelNumber(i.modelNumber)
+                        cache.set(i.modelNumber, j.data)
+                    }
+                    setProductsByModelNumber(cache)
+                })
+        }
+    }, [page, sortValue, renderFilter, filter]);
 
     const sortOptions = [
         {label: 'Price High to Low', value: '0'},
@@ -82,7 +96,7 @@ const DataViewDemo = () => {
                                             <a href={store.link} target="blank">
                                                 <Button
                                                     className="border-bluegray-100 bg-white p-button-raised w-5 align-right">
-                                                    <img src={store.seller + ".png"} className="w-9 m-auto" alt={store.id}/>
+                                                    <img src={store.seller + ".png"} className="w-8 m-auto" alt={store.id}/>
                                                 </Button>
                                             </a>
                                         </div>
@@ -99,7 +113,6 @@ const DataViewDemo = () => {
             </div>
         );
     }
-
     const itemTemplate = (product) => {
         if (!product) {
             return;

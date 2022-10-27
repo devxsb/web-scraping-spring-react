@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,12 +67,44 @@ public class ProductService {
         return productRepository.findProductsByName(name);
     }
 
+    public Page<Product> getProductsByFilter(String value, Pageable page) {
+        String[] filter = value.toLowerCase().split("&");
+
+        List<String> brandFilters = new ArrayList<>();
+        List<String> processorBrandFilters = new ArrayList<>();
+        List<String> processorTechnologyFilters = new ArrayList<>();
+        List<String> operatingSystemFilters = new ArrayList<>();
+        List<String> screenSizeFilters = new ArrayList<>();
+        List<String> diskFilters = new ArrayList<>();
+        List<String> ramFilters = new ArrayList<>();
+
+        for (String x : filter) {
+            String[] y = x.replace("-", " ").split("=");
+            if ("brand".equals(y[0])) {
+                brandFilters.add(y[1]);
+            } else if ("processorbrand".equals(y[0])) {
+                processorBrandFilters.add(y[1]);
+            } else if ("processortechnology".equals(y[0])) {
+                processorTechnologyFilters.add(y[1]);
+            } else if ("operatingsystem".equals(y[0])) {
+                operatingSystemFilters.add(y[1]);
+            } else if ("screensize".equals(y[0])) {
+                screenSizeFilters.add(y[1]);
+            } else if ("disk".equals(y[0])) {
+                diskFilters.add(y[1]);
+            } else if ("ram".equals(y[0])) {
+                ramFilters.add(y[1]);
+            }
+        }
+        return productRepository.findProductsByFilter(brandFilters, processorBrandFilters, processorTechnologyFilters, operatingSystemFilters, screenSizeFilters, diskFilters, ramFilters, page);
+    }
+
     public Object getProductsBySearch(String searchValue, Pageable page) {
         try {
-            if (productRepository.findProductsByNameContainsIgnoreCase(
-                    searchValue.replaceAll(" ", "-"), page).getTotalElements() > 0)
-                return productRepository.findProductsByNameContainsIgnoreCase(
-                        searchValue.replaceAll(" ", "-"), page);
+            if (productRepository.findProductsByNameContainsIgnoreCaseAndSeller(
+                    searchValue.replaceAll(" ", "-"), Seller.VATAN, page).getTotalElements() > 0)
+                return productRepository.findProductsByNameContainsIgnoreCaseAndSeller(
+                        searchValue.replaceAll(" ", "-"), Seller.VATAN, page);
             else if (productRepository.findProductsByModelNumberOrderByPrice(
                     searchValue).size() > 0)
                 return productRepository.findProductsByModelNumberOrderByPrice(

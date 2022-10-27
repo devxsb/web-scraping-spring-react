@@ -1,0 +1,16 @@
+.multiselect-demo .p-multiselect {
+    width: 16rem;
+}
+
+.filter {
+    padding: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.header {
+    color: #343a40;
+    border: 1px solid #dee2e6;
+    padding: 1.1rem;
+    font-weight: 700;
+    border-radius: 6px;
+}

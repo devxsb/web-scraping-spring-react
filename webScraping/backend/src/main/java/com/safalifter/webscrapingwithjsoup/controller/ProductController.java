@@ -2,6 +2,7 @@ package com.safalifter.webscrapingwithjsoup.controller;
 
 import com.safalifter.webscrapingwithjsoup.model.Product;
 import com.safalifter.webscrapingwithjsoup.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -30,5 +31,12 @@ public class ProductController {
     @GetMapping("/{name}")
     public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
         return ResponseEntity.ok(productService.getProductsByName(name));
+    }
+
+    @GetMapping("/filter/{value}")
+    public ResponseEntity<Page<Product>> getProductsByFilter(
+            @PathVariable String value,
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 9) Pageable page) {
+        return ResponseEntity.ok(productService.getProductsByFilter(value, page));
     }
 }
